@@ -3,6 +3,7 @@ FROM php:8.2-fpm
 # Install required PHP extensions
 RUN apt-get update && apt-get install -y \
     libxml2-dev \
+    libcurl4-openssl-dev \
     && docker-php-ext-install \
     curl \
     dom \
