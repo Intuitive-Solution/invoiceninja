@@ -6,7 +6,8 @@ I want to a new entity called Resources
 Name 
 Description
 Rate
-and has a relationship to company and migration files 
+and has a relationship to company and create required migration files 
+and let me know the command to run the migration file
 
 -----------------
 
