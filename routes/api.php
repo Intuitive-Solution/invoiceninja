@@ -124,6 +124,7 @@ use App\Http\Controllers\Reports\ClientContactReportController;
 use App\Http\Controllers\Reports\PurchaseOrderReportController;
 use App\Http\Controllers\Reports\RecurringInvoiceReportController;
 use App\Http\Controllers\Reports\PurchaseOrderItemReportController;
+use App\Http\Controllers\ResourceController;
 
 Route::group(['middleware' => ['throttle:api', 'api_secret_check']], function () {
     Route::post('api/v1/signup', [AccountController::class, 'store'])->name('signup.submit');
@@ -328,9 +329,13 @@ Route::group(['middleware' => ['throttle:api', 'api_db', 'token_auth', 'locale']
     Route::resource('recurring_invoices', RecurringInvoiceController::class); // name = (recurring_invoices. index / create / show / update / destroy / edit
     Route::post('recurring_invoices/bulk', [RecurringInvoiceController::class, 'bulk'])->name('recurring_invoices.bulk');
     Route::put('recurring_invoices/{recurring_invoice}/upload', [RecurringInvoiceController::class, 'upload']);
+
     Route::resource('recurring_quotes', RecurringQuoteController::class); // name = (recurring_invoices. index / create / show / update / destroy / edit
     Route::post('recurring_quotes/bulk', [RecurringQuoteController::class, 'bulk'])->name('recurring_quotes.bulk');
     Route::put('recurring_quotes/{recurring_quote}/upload', [RecurringQuoteController::class, 'upload']);
+
+    Route::resource('resources', ResourceController::class); // name = (resources. index / create / show / update / destroy / edit
+    Route::post('resources/bulk', [ResourceController::class, 'bulk'])->name('resources.bulk');
 
     Route::post('refresh', [LoginController::class, 'refresh'])->middleware('throttle:refresh');
 
