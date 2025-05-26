@@ -938,13 +938,13 @@ class PdfBuilder
             $data[$key][$table_type.".{$_table_type}4"] = strlen($item->custom_value4) >= 1 ? $helpers->formatCustomFieldValue($this->service->company->custom_fields, "{$_table_type}4", $item->custom_value4, $this->service->config->currency_entity) : '';
 
             if ($item->quantity > 0 || $item->cost > 0) {
-                $data[$key][$table_type.'.quantity'] = $this->service->config->formatValueNoTrailingZeroes($item->quantity);
+                $data[$key][$table_type.'.quantity'] = $item->quantity == 0 ? '' : $this->service->config->formatValueNoTrailingZeroes($item->quantity);
 
                 $data[$key][$table_type.'.unit_cost'] = $this->service->config->formatMoneyNoRounding($item->cost);
 
                 $data[$key][$table_type.'.cost'] = $this->service->config->formatMoney($item->cost);
 
-                $data[$key][$table_type.'.line_total'] = $this->service->config->formatMoneyNoRounding($item->line_total);
+                $data[$key][$table_type.'.line_total'] = $item->quantity == 0 ? '' : $this->service->config->formatMoneyNoRounding($item->line_total);
             } else {
                 $data[$key][$table_type.'.quantity'] = '';
 
@@ -962,7 +962,7 @@ class PdfBuilder
             }
 
             if (property_exists($item, 'tax_amount')) {
-                $data[$key][$table_type.'.tax_amount'] = ($item->tax_amount == 0) ? '' : $this->service->config->formatMoney($item->tax_amount);
+                $data[$key][$table_type.'.tax_amount'] = ($item->tax_amount == 0 || $item->quantity == 0) ? '' : $this->service->config->formatMoney($item->tax_amount);
             } else {
                 $data[$key][$table_type.'.tax_amount'] = '';
             }

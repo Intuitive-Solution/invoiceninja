@@ -305,13 +305,13 @@ trait MakesInvoiceValues
             $data[$key][$table_type.".{$_table_type}4"] = strlen($item->custom_value4) >= 1 ? $helpers->formatCustomFieldValue($this->company->custom_fields, "{$_table_type}4", $item->custom_value4, $entity) : '';
 
             if ($item->quantity > 0 || $item->cost > 0) {
-                $data[$key][$table_type.'.quantity'] = Number::formatValueNoTrailingZeroes($item->quantity, $entity);
+                $data[$key][$table_type.'.quantity'] = $item->quantity == 0 ? '' : Number::formatValueNoTrailingZeroes($item->quantity, $entity);
 
                 $data[$key][$table_type.'.unit_cost'] = Number::formatMoneyNoRounding($item->cost, $entity);
 
                 $data[$key][$table_type.'.cost'] = Number::formatMoney($item->cost, $entity);
 
-                $data[$key][$table_type.'.line_total'] = Number::formatMoney($item->line_total, $entity);
+                $data[$key][$table_type.'.line_total'] = $item->quantity == 0 ? '' : Number::formatMoney($item->line_total, $entity);
             } else {
                 $data[$key][$table_type.'.quantity'] = '';
 
@@ -329,7 +329,7 @@ trait MakesInvoiceValues
             }
 
             if (property_exists($item, 'tax_amount')) {
-                $data[$key][$table_type.'.tax_amount'] = ($item->tax_amount == 0) ? '' : Number::formatMoney($item->tax_amount, $entity);
+                $data[$key][$table_type.'.tax_amount'] = ($item->tax_amount == 0 || $item->quantity == 0) ? '' : Number::formatMoney($item->tax_amount, $entity);
             } else {
                 $data[$key][$table_type.'.tax_amount'] = '';
             }
