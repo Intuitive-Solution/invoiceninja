@@ -22,7 +22,10 @@ class ResourceFactory
         $resource->user_id = $user_id;
         $resource->name = '';
         $resource->description = '';
-        $resource->rate = 0;
+        $resource->rate_per_hour = 0;
+        $resource->rate_per_day = 0;
+        $resource->rate_per_week = 0;
+        $resource->rate_per_month = 0;
         $resource->custom_value1 = '';
         $resource->custom_value2 = '';
         $resource->custom_value3 = '';

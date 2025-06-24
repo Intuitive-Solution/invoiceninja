@@ -20,7 +20,11 @@ return new class extends Migration
             // Resource specific fields
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('rate', 16, 4)->default(0);
+            $table->decimal('rate_per_hour', 16, 4)->default(0);
+            $table->decimal('rate_per_day', 16, 4)->default(0);
+            $table->decimal('rate_per_week', 16, 4)->default(0);
+            $table->decimal('rate_per_month', 16, 4)->default(0);
+            
             
             // Standard fields following Invoice Ninja patterns
             $table->string('custom_value1')->nullable();

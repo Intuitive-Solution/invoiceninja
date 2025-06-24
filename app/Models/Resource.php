@@ -23,7 +23,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $assigned_user_id
  * @property string $name
  * @property string|null $description
- * @property float $rate
+ * @property float $rate_per_hour
+ * @property float $rate_per_day
+ * @property float $rate_per_week
+ * @property float $rate_per_month
  * @property string|null $custom_value1
  * @property string|null $custom_value2
  * @property string|null $custom_value3
@@ -49,7 +52,10 @@ class Resource extends BaseModel
     protected $fillable = [
         'name',
         'description',
-        'rate',
+        'rate_per_month',
+        'rate_per_hour',
+        'rate_per_day',
+        'rate_per_week',
         'custom_value1',
         'custom_value2',
         'custom_value3',
@@ -60,7 +66,10 @@ class Resource extends BaseModel
         'updated_at' => 'timestamp',
         'created_at' => 'timestamp',
         'deleted_at' => 'timestamp',
-        'rate' => 'float',
+        'rate_per_month' => 'float',
+        'rate_per_hour' => 'float',
+        'rate_per_day' => 'float',
+        'rate_per_week' => 'float',
         'is_deleted' => 'boolean',
     ];
 

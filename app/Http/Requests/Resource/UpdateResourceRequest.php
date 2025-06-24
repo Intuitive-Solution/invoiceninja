@@ -44,7 +44,10 @@ class UpdateResourceRequest extends Request
 
         $rules['name'] = 'sometimes|required|string|max:255';
         $rules['description'] = 'nullable|string';
-        $rules['rate'] = ['sometimes', 'bail', 'nullable', 'numeric', 'min:0', 'max:99999999999999'];
+        $rules['rate_per_hour'] = ['sometimes', 'bail', 'nullable', 'numeric', 'min:0', 'max:99999999999999'];
+        $rules['rate_per_day'] = ['sometimes', 'bail', 'nullable', 'numeric', 'min:0', 'max:99999999999999'];
+        $rules['rate_per_week'] = ['sometimes', 'bail', 'nullable', 'numeric', 'min:0', 'max:99999999999999'];
+        $rules['rate_per_month'] = ['sometimes', 'bail', 'nullable', 'numeric', 'min:0', 'max:99999999999999'];
 
         return $this->globalRules($rules);
     }
@@ -58,8 +61,17 @@ class UpdateResourceRequest extends Request
 
         $input = $this->decodePrimaryKeys($input);
 
-        if (array_key_exists('rate', $input) && is_null($input['rate'])) {
-            $input['rate'] = 0;
+        if (array_key_exists('rate_per_hour', $input) && is_null($input['rate_per_hour'])) {
+            $input['rate_per_hour'] = 0;
+        }
+        if (array_key_exists('rate_per_day', $input) && is_null($input['rate_per_day'])) {
+            $input['rate_per_day'] = 0;
+        }
+        if (array_key_exists('rate_per_week', $input) && is_null($input['rate_per_week'])) {
+            $input['rate_per_week'] = 0;
+        }
+        if (array_key_exists('rate_per_month', $input) && is_null($input['rate_per_month'])) {
+            $input['rate_per_month'] = 0;
         }
 
         $this->replace($input);
@@ -69,8 +81,14 @@ class UpdateResourceRequest extends Request
     {
         return [
             'name.required' => 'The resource name is required.',
-            'rate.numeric' => 'The rate must be a valid number.',
-            'rate.min' => 'The rate must be at least 0.',
+            'rate_per_hour.numeric' => 'The hourly rate must be a valid number.',
+            'rate_per_hour.min' => 'The hourly rate must be at least 0.',
+            'rate_per_day.numeric' => 'The daily rate must be a valid number.',
+            'rate_per_day.min' => 'The daily rate must be at least 0.',
+            'rate_per_week.numeric' => 'The weekly rate must be a valid number.',
+            'rate_per_week.min' => 'The weekly rate must be at least 0.',
+            'rate_per_month.numeric' => 'The monthly rate must be a valid number.',
+            'rate_per_month.min' => 'The monthly rate must be at least 0.',
         ];
     }
 } 
