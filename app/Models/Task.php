@@ -366,7 +366,7 @@ class Task extends BaseModel
             })
             ->map(function ($log) use ($parent_entity, $time_format) {
                 $interval_description = $log[2] ?? '';
-                $hours = ctrans('texts.hours');
+                $hours = ctrans('texts.quantity');
 
                 $parts = [];
 

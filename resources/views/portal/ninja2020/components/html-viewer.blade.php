@@ -109,7 +109,7 @@ span {
         <table width="100%">
             <thead>
                 <tr class="border-b-2">
-                    <th style="text-align:left; width:70%; padding-left:2px;">Service</th>
+                    <th style="text-align:left; width:70%; padding-left:2px;">{{ ctrans('texts.resource') }}</th>
                     <th style="text-align:right; width:30%; padding-right:2px;">Amount</th>
                 </tr>
             </thead>

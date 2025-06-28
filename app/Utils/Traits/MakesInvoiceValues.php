@@ -363,6 +363,18 @@ trait MakesInvoiceValues
             }
 
             $data[$key]['task_id'] = property_exists($item, 'task_id') ? $item->task_id : '';
+
+            // Handle unit field for resources (tasks)
+            if ($table_type == '$task' && property_exists($item, 'unit') && !empty($item->unit)) {
+                $data[$key][$table_type.'.unit'] = $item->unit;
+            } else {
+                $data[$key][$table_type.'.unit'] = '';
+            }
+
+            // Handle hours field for resources (tasks) - map to quantity
+            if ($table_type == '$task') {
+                $data[$key][$table_type.'.hours'] = $data[$key][$table_type.'.quantity'];
+            }
         }
 
         //nlog(microtime(true) - $start);

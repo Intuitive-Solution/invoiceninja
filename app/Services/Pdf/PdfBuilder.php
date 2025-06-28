@@ -852,8 +852,8 @@ class PdfBuilder
                     // $task.cost => $task.rate
                     // $task.quantity => $task.hours
 
-                    if ($cell == '$task.rate') {
-                        $element['elements'][] = ['element' => 'td', 'content' => $row['$task.cost'], 'properties' => ['data-ref' => 'task_table-task.cost-td']];
+                    if ($cell == '$task.unit') {
+                        $element['elements'][] = ['element' => 'td', 'content' => $row['$task.unit'], 'properties' => ['data-ref' => 'task_table-task.unit-td']];
                     } elseif ($cell == '$product.discount' && !$this->service->company->enable_product_discount) {
                         $element['elements'][] = ['element' => 'td', 'content' => $row['$product.discount'], 'properties' => ['data-ref' => 'product_table-product.discount-td', 'style' => 'display: none;']];
                     } elseif ($cell == '$task.hours') {
@@ -872,7 +872,7 @@ class PdfBuilder
                         $element['elements'][] = ['element' => 'td', 'content' => $row[$cell], 'properties' => ['data-ref' => 'task_table-task.tax2-td']];
                     } elseif ($cell == '$task.tax_rate3') {
                         $element['elements'][] = ['element' => 'td', 'content' => $row[$cell], 'properties' => ['data-ref' => 'task_table-task.tax3-td']];
-                    } elseif ($cell == '$product.unit_cost' || $cell == '$task.rate') {
+                    } elseif ($cell == '$product.unit_cost' || $cell == '$task.unit') {
                         $element['elements'][] = ['element' => 'td', 'content' => $row[$cell], 'properties' => ['style' => 'white-space: nowrap;', 'data-ref' => "{$_type}_table-" . substr($cell, 1) . '-td']];
                     } else {
                         $element['elements'][] = ['element' => 'td', 'content' => $row[$cell], 'properties' => ['data-ref' => "{$_type}_table-" . substr($cell, 1) . '-td']];
@@ -996,6 +996,18 @@ class PdfBuilder
             }
 
             $data[$key]['task_id'] = property_exists($item, 'task_id') ? $item->task_id : '';
+
+            // Handle unit field for resources (tasks)
+            if ($table_type == '$task' && property_exists($item, 'unit') && !empty($item->unit)) {
+                $data[$key][$table_type.'.unit'] = $item->unit;
+            } else {
+                $data[$key][$table_type.'.unit'] = '';
+            }
+
+            // Handle hours field for resources (tasks) - map to quantity
+            if ($table_type == '$task') {
+                $data[$key][$table_type.'.hours'] = $data[$key][$table_type.'.quantity'];
+            }
         }
 
         //nlog(microtime(true) - $start);
@@ -1019,7 +1031,7 @@ class PdfBuilder
         $aliases = [
             '$product.product_key' => '$product.item',
             '$task.product_key' => '$task.service',
-            '$task.rate' => '$task.cost',
+            '$task.unit' => '$task.unit',
         ];
 
         $table_type = "{$type}_columns";

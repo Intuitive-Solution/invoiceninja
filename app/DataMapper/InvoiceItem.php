@@ -67,6 +67,8 @@ class InvoiceItem
 
     public $unit_code = 'C62';
 
+    public $unit = '';
+
     public static $casts = [
         'task_id' => 'string',
         'expense_id' => 'string',
@@ -95,5 +97,6 @@ class InvoiceItem
         'custom_value3' => 'string',
         'custom_value4' => 'string',
         'unit_code' => 'string',
+        'unit' => 'string',
     ];
 }

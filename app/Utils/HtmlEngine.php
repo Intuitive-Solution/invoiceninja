@@ -626,11 +626,11 @@ class HtmlEngine
 
         $data['$task.date'] = ['value' => '', 'label' => ctrans('texts.date')];
         $data['$task.discount'] = ['value' => '', 'label' => ctrans('texts.discount')];
-        $data['$task.service'] = ['value' => '', 'label' => ctrans('texts.service')];
+        $data['$task.service'] = ['value' => '', 'label' => ctrans('texts.resource')];
         $data['$task.description'] = ['value' => '', 'label' => ctrans('texts.description')];
-        $data['$task.rate'] = ['value' => '', 'label' => ctrans('texts.rate')];
-        $data['$task.cost'] = ['value' => '', 'label' => ctrans('texts.rate')];
-        $data['$task.hours'] = ['value' => '', 'label' => ctrans('texts.hours')];
+        $data['$task.unit'] = ['value' => '', 'label' => ctrans('texts.unit')];
+        $data['$task.cost'] = ['value' => '', 'label' => ctrans('texts.unit')];
+        $data['$task.hours'] = ['value' => '', 'label' => ctrans('texts.quantity')];
         $data['$task.tax'] = ['value' => '', 'label' => ctrans('texts.tax')];
         $data['$task.tax_name1'] = ['value' => '', 'label' => ctrans('texts.tax')];
         $data['$task.tax_name2'] = ['value' => '', 'label' => ctrans('texts.tax')];
@@ -638,7 +638,7 @@ class HtmlEngine
         $data['$task.line_total'] = ['value' => '', 'label' => ctrans('texts.line_total')];
         $data['$task.tax_amount'] = ['value' => '', 'label' => ctrans('texts.tax')];
         $data['$task.gross_line_total'] = ['value' => '', 'label' => ctrans('texts.gross_line_total')];
-        $data['$task.service'] = ['value' => '', 'label' => ctrans('texts.service')];
+        $data['$task.service'] = ['value' => '', 'label' => ctrans('texts.resource')];
         $data['$task.task1'] = ['value' => '', 'label' => $this->helpers->makeCustomField($this->company->custom_fields, 'task1')];
         $data['$task.task2'] = ['value' => '', 'label' => $this->helpers->makeCustomField($this->company->custom_fields, 'task2')];
         $data['$task.task3'] = ['value' => '', 'label' => $this->helpers->makeCustomField($this->company->custom_fields, 'task3')];

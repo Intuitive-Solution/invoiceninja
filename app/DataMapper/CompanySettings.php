@@ -1028,7 +1028,7 @@ class CompanySettings extends BaseSettings
             'task_columns' => [
                 '$task.service',
                 '$task.description',
-                '$task.rate',
+                '$task.unit',
                 '$task.hours',
                 '$task.discount',
                 '$task.tax',
